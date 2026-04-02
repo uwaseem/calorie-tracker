@@ -10,7 +10,8 @@ export default {
             exclude: [
                 'node_modules/',
                 'dist/',
-                'server.ts'
+                'server.ts',
+                'services/'
             ]
         }
     }
