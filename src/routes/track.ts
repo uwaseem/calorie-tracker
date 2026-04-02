@@ -7,7 +7,6 @@ const router = Router()
 const upload = multer({ storage: multer.memoryStorage() })
 
 router.post("/", upload.single("file"), async (req, res) => {
-
   const file = req.file
 
   if (!file) {
@@ -35,7 +34,6 @@ router.post("/", upload.single("file"), async (req, res) => {
   }
 
   const results = await analyseImageWithLLM(file.buffer)
-
     return res
       .status(200)
       .json({ data: results})
