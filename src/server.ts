@@ -1,5 +1,4 @@
-import { APP } from "./app.js" 
-
+import { APP } from "./app.js"
 
 if (process.env.NODE_ENV !== "test") {
     const PORT = Number(process.env.PORT) || 3000
