@@ -33,10 +33,22 @@ router.post("/", upload.single("file"), async (req, res) => {
       })
   }
 
-  const results = await analyseImageWithLLM(file.buffer)
+  try {
+    const results = await analyseImageWithLLM(file.buffer)
     return res
       .status(200)
       .json({ data: results})
+
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ 
+        error: {
+          code: "IMAGE_ANALYSIS_FAILED",
+          message: "Failed to analyze the image. Please try again later.",
+        }
+      })
+  }
 })
 
 export default router
