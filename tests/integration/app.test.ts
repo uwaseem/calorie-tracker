@@ -6,7 +6,6 @@ import { APP } from "../../src/app.js"
 
 const message = "Welcome to Calorie Tracker!"
 
-// TODO: add proper test serving the UI for this
 describe("/", () => {
   it("should return status code 200", async () => {
     const res = await request(APP).get("/")
