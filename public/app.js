@@ -12,8 +12,6 @@ image.addEventListener("change", (event) => {
   }
 
   selectedFile = files[0]
-  console.log("Selected file:", selectedFile)
-
 })
 
 uploadBtn.addEventListener("click", async () => {
