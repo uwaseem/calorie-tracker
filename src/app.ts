@@ -9,7 +9,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 export const APP = express()
-APP.use(express.static(path.join(__dirname, "../client")))
+APP.use(express.static(path.join(__dirname, "../public")))
 
 APP.get(["/health", "/ping"], (_req, res) => {
   return res
