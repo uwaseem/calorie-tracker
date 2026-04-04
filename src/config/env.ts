@@ -1,10 +1,7 @@
 import dotenv from "dotenv"
 dotenv.config()
 
-export function getEnvValue(key: string): string {
-  console.log('&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&')
-  console.log(`Retrieving environment variable: ${key}`)
-  console.log('########################################')
+function getEnvValue(key: string): string {
   const value = process.env[key]
 
   if (!value) {
@@ -12,3 +9,5 @@ export function getEnvValue(key: string): string {
   }
   return value
 }
+
+export const getGeminiKey = () => getEnvValue("GEMINI_API_KEY")
