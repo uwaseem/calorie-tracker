@@ -3,14 +3,14 @@ import type { Schema } from "@google/generative-ai"
 
 import { GEMINI_API_KEY } from "../config/env.js"
 
-const getGeminiAPIKey = () => {
-  if (!GEMINI_API_KEY) {
-    throw new Error("GEMINI_API_KEY is not defined in environment variables.")
-  }
-  return GEMINI_API_KEY
-}
+// const getGeminiAPIKey = () => {
+//   if (!GEMINI_API_KEY) {
+//     throw new Error("GEMINI_API_KEY is not defined in environment variables.")
+//   }
+//   return GEMINI_API_KEY
+// }
 
-const getClient = () => (new GoogleGenerativeAI(getGeminiAPIKey()))
+// const getClient = () => (new GoogleGenerativeAI(getGeminiAPIKey()))
 
 const prompt = `
 You are a strict JSON generator.
@@ -75,6 +75,17 @@ export async function sendImage(image: Buffer) {
 	])
 
 	return result.response.text()
+}
+
+function getGeminiAPIKey() {
+  if (!GEMINI_API_KEY) {
+    throw new Error("GEMINI_API_KEY is not defined in environment variables.")
+  }
+  return GEMINI_API_KEY
+}
+
+function getClient() {
+  return new GoogleGenerativeAI(getGeminiAPIKey())
 }
 
 /* Enable this function to debug available models for the provided API key
