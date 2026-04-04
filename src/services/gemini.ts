@@ -1,11 +1,10 @@
 import { GoogleGenerativeAI, SchemaType } from "@google/generative-ai"
 import type { Schema } from "@google/generative-ai"
 
-import { getGeminiKey } from "../config/env.js"
+import { getEnvValue } from "../config/env.js"
 
 const getGeminiAPIKey = () => {
-  // const GEMINI_API_KEY = getEnvValue("GEMINI_API_KEY")
-  const GEMINI_API_KEY = getGeminiKey()
+  const GEMINI_API_KEY = getEnvValue("GEMINI_API_KEY")
 
   if (!GEMINI_API_KEY) {
     throw new Error("GEMINI_API_KEY is not defined in environment variables.")
