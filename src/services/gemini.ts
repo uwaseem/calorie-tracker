@@ -10,7 +10,7 @@ const getGeminiAPIKey = () => {
   return GEMINI_API_KEY
 }
 
-// const getClientv2 = () => (new GoogleGenerativeAI(getGeminiAPIKey()))
+const getClient = () => (new GoogleGenerativeAI(getGeminiAPIKey()))
 
 const prompt = `
 You are a strict JSON generator.
@@ -75,10 +75,6 @@ export async function sendImage(image: Buffer) {
 	])
 
 	return result.response.text()
-}
-
-function getClient() {
-  return new GoogleGenerativeAI(getGeminiAPIKey())
 }
 
 /* Enable this function to debug available models for the provided API key

@@ -1,10 +1,10 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest"
 
-import { analyseImageWithLLM } from "../../src/imageAnalyser.js"
-import { sendImage } from "../../src/services/gemini.js"
-
 // Mock the gemini module
 vi.mock("../../src/services/gemini.js", () => ({ sendImage: vi.fn() }))
+
+import { analyseImageWithLLM } from "../../src/imageAnalyser.js"
+import { sendImage } from "../../src/services/gemini.js"
 
 describe("imageAnalyser", () => {
   describe("when Gemini returns a non-JSON response", () => {
