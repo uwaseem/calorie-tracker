@@ -76,21 +76,21 @@ export async function sendImage(image: Buffer) {
 	return result.response.text()
 }
 
-// Enable this function to debug available models for the provided API key
-// async function diagnostic() {
-//   try {
-//     // We use the v1beta endpoint to list models
-//     const url = `https://generativelanguage.googleapis.com/v1beta/models?key=${getGeminiAPIKey()}`
-//     const response = await fetch(url);
-//     const data = await response.json();
+/* Enable this function to debug available models for the provided API key
+async function diagnostic() {
+  try {
+    // We use the v1beta endpoint to list models
+    const url = `https://generativelanguage.googleapis.com/v1beta/models?key=${getGeminiAPIKey()}`
+    const response = await fetch(url);
+    const data = await response.json();
     
-//     console.log("Available models for your key:");
-//     if (data.models) {
-//       data.models.forEach(m => console.log("- " + m.name));
-//     } else {
-//       console.log("No models found. Response:", data);
-//     }
-//   } catch (e) {
-//     console.error("Failed to fetch models", e);
-//   }
-// }
+    console.log("Available models for your key:");
+    if (data.models) {
+      data.models.forEach(m => console.log("- " + m.name));
+    } else {
+      console.log("No models found. Response:", data);
+    }
+  } catch (e) {
+    console.error("Failed to fetch models", e);
+  }
+} */

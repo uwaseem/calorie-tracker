@@ -5,11 +5,10 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest"
 
 import { APP } from "../../src/app.js"
 import { CONFIDENCE } from "../../src/constants/confidence.js"
-
-import * as gemini from "../../src/services/gemini.js"
+import { sendImage } from "../../src/services/gemini.js"
 
 // Mock the gemini module
-vi.mock("../../src/services/gemini.js", () => { return { sendImage: vi.fn() } })
+vi.mock("../../src/services/gemini.js", () => ({ sendImage: vi.fn() }))
 
 describe("/track", () => {
   describe("when no input file provided", () => {
@@ -69,7 +68,7 @@ describe("/track", () => {
           calories: 600,
           confidence: "low"
         }
-        vi.mocked(gemini.sendImage).mockResolvedValue(JSON.stringify(geminiMockResponse))
+        vi.mocked(sendImage).mockResolvedValue(JSON.stringify(geminiMockResponse))
       })
 
       afterEach(() => { vi.clearAllMocks() })
@@ -98,7 +97,7 @@ describe("/track", () => {
       beforeEach(() => {
         // Arrange the failed Gemini mock response
         const geminiMockResponse = "Items found were chicken, rice, broccoli. Total calories are 600. Confidence is low."
-        vi.mocked(gemini.sendImage).mockResolvedValue(geminiMockResponse)
+        vi.mocked(sendImage).mockResolvedValue(geminiMockResponse)
       })
 
       afterEach(() => { vi.clearAllMocks() })
