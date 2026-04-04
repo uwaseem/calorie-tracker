@@ -5,10 +5,10 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest"
 
 import { APP } from "../../src/app.js"
 import { CONFIDENCE } from "../../src/constants/confidence.js"
+import { sendImage } from "../../src/services/gemini.js"
 
 // Mock the gemini module
 vi.mock("../../src/services/gemini.js", () => ({ sendImage: vi.fn() }))
-import { sendImage } from "../../src/services/gemini.js"
 
 describe("/track", () => {
   describe("when no input file provided", () => {
