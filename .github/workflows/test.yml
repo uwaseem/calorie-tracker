@@ -21,3 +21,5 @@ jobs:
 
       - name: Run tests
         run: npm test
+        env:
+          GEMINI_API_KEY: fake-API-key-for-testing
