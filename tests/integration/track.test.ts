@@ -123,5 +123,36 @@ describe("/track", () => {
         })
       })
     })
+
+    describe("but non-error thrown downstream", () => {
+      beforeEach(() => {
+        // Arrange the failed Gemini mock response
+        vi.mocked(sendImage).mockRejectedValue("bad string error")
+      })
+
+      afterEach(() => { vi.clearAllMocks() })
+
+      it("should return status code 500", async () => {
+        const res = await request(APP)
+          .post("/track")
+          .attach("file", filePath)
+
+        expect(res.status).toBe(500)
+      })
+
+      it("should return appropriate error message", async () => {
+        const res = await request(APP)
+          .post("/track")
+          .attach("file", filePath)
+
+        expect(res.body).toEqual({
+          error: {
+            code: "IMAGE_ANALYSIS_FAILED",
+            message: "Failed to analyze the image. Please try again later.",
+            error: "Unknown error occurred"
+          }
+        })
+      })
+    })
   })
 })

@@ -48,7 +48,7 @@ router.post("/", upload.single("file"), async (req, res) => {
         error: {
           code: "IMAGE_ANALYSIS_FAILED",
           message: "Failed to analyze the image. Please try again later.",
-          error: error instanceof Error ? error.message : "Unknown error"
+          error: error instanceof Error ? error.message : "Unknown error occurred"    
         }
       })
   }
