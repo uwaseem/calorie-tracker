@@ -1,7 +1,13 @@
-import { GoogleGenerativeAI, SchemaType } from "@google/generative-ai"
-import type { Schema } from "@google/generative-ai"
+import { GoogleGenerativeAI } from "@google/generative-ai"
+import type { Schema, GenerationConfig } from "@google/generative-ai"
 
 import { getEnvValue } from "../config/env.js"
+
+type sendImageParams = {
+  image: Buffer,
+  prompt: string,
+  responseSchema?: Schema
+}
 
 const getGeminiAPIKey = () => {
   const GEMINI_API_KEY = getEnvValue("GEMINI_API_KEY")
@@ -14,53 +20,21 @@ const getGeminiAPIKey = () => {
 
 const getClient = () => (new GoogleGenerativeAI(getGeminiAPIKey()))
 
-const prompt = `
-You are a strict JSON generator.
+export async function sendImage(params: sendImageParams): Promise<string> {
+  const { image, prompt, responseSchema } = params
+  const generationConfig: GenerationConfig = {
+    temperature: 0.2,
+    maxOutputTokens: 1024,
+    topP: 0.8,
+    topK: 20,
+    responseMimeType: "application/json",
+    ...responseSchema ? { responseSchema } : {}
+  }
 
-Return ONLY valid JSON.
-Do NOT include explanations.
-Do NOT include markdown.
-Do NOT include backticks.
-
-Schema:
-{
-	"foodItems": string[],
-	"totalCalories": number,
-	"confidence": number
-}
-
-If unsure, still return best estimate.
-`
-
-const responseSchema: Schema = {
-	type: SchemaType.OBJECT,
-	properties: {
-		items: { 
-			type: SchemaType.ARRAY,
-			items: { type: SchemaType.STRING }
-		},
-		calories: { type: SchemaType.NUMBER },
-		confidence: {
-			type: SchemaType.STRING,
-			format: "enum",
-			enum: ["low", "medium", "high"]
-		}
-	},
-	required: ["items", "calories", "confidence"]
-}
-
-export async function sendImage(image: Buffer) {
   const GGAI = getClient()
 	const model = GGAI.getGenerativeModel({
 		model: "gemini-2.5-flash",
-		generationConfig: {
-			temperature: 0.2,
-			maxOutputTokens: 1024,
-			topP: 0.8,
-			topK: 20,
-			responseMimeType: "application/json",
-			responseSchema
-		}
+		generationConfig
 	})
 
   // Enable this function to debug available models for the provided API key

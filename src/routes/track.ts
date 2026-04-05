@@ -15,7 +15,8 @@ router.post("/", upload.single("file"), async (req, res) => {
       .json({ 
         error: {
           code: "NO_FILE_UPLOADED",
-          message: "Please upload a file to track calories"
+          message: "Please upload a file to track calories",
+          error: "No file found in the request"
         }
       })
   }
@@ -28,7 +29,8 @@ router.post("/", upload.single("file"), async (req, res) => {
       .json({ 
         error: {
           code: "INVALID_FILE_TYPE",
-          message: "Please upload a valid image file to track calories"
+          message: "Please upload a valid image file to track calories",
+          error: `Unsupported file type: ${file.mimetype}`
         }
       })
   }
@@ -46,6 +48,7 @@ router.post("/", upload.single("file"), async (req, res) => {
         error: {
           code: "IMAGE_ANALYSIS_FAILED",
           message: "Failed to analyze the image. Please try again later.",
+          error: error instanceof Error ? error.message : "Unknown error occurred"    
         }
       })
   }
