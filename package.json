@@ -8,7 +8,8 @@
     "start": "tsx src/server.ts",
     "test": "vitest run",
     "test-w": "vitest",
-    "test-c": "vitest run --coverage"
+    "test-c": "vitest run --coverage",
+    "test-ui": "playwright test"
   },
   "keywords": [],
   "author": "",
@@ -30,6 +31,7 @@
     "supertest": "^7.2.2",
     "tsx": "^4.21.0",
     "typescript": "^6.0.2",
-    "vitest": "^4.1.2"
+    "vitest": "^4.1.2",
+    "wait-on": "^9.0.4"
   }
 }
