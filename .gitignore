@@ -5,3 +5,4 @@ coverage
 *.log
 .DS_Store
 FOR_AI_USAGE
+test-results
