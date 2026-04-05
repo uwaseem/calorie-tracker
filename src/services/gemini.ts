@@ -14,24 +14,6 @@ const getGeminiAPIKey = () => {
 
 const getClient = () => (new GoogleGenerativeAI(getGeminiAPIKey()))
 
-const prompt = `
-You are a strict JSON generator.
-
-Return ONLY valid JSON.
-Do NOT include explanations.
-Do NOT include markdown.
-Do NOT include backticks.
-
-Schema:
-{
-	"foodItems": string[],
-	"totalCalories": number,
-	"confidence": number
-}
-
-If unsure, still return best estimate.
-`
-
 const responseSchema: Schema = {
 	type: SchemaType.OBJECT,
 	properties: {
@@ -49,7 +31,7 @@ const responseSchema: Schema = {
 	required: ["items", "calories", "confidence"]
 }
 
-export async function sendImage(image: Buffer) {
+export async function sendImage(image: Buffer, prompt: string): Promise<string> {
   const GGAI = getClient()
 	const model = GGAI.getGenerativeModel({
 		model: "gemini-2.5-flash",
