@@ -1,5 +1,4 @@
 import request from "supertest"
-import path from "path"
 
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest"
 
