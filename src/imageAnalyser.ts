@@ -11,15 +11,15 @@ Do NOT include explanations, markdown, or backticks.
 
 Schema:
 {
-  "foodItems": string[],
-  "estimatedBreakdown": [
+  "items": string[],
+  "calories": number,
+  "confidence": number,
+  "breakdown": [
     {
       "item": string,
       "calories": number
     }
-  ],
-  "totalCalories": number,
-  "confidence": number
+  ]
 }
 
 Instructions:
