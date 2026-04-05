@@ -4,7 +4,7 @@ export default defineConfig({
   testDir: "./tests/ui",
   use:{
     browserName: "chromium",
-    baseURL: "localhost:3000",
+    baseURL: "http://localhost:3000",
     headless: true
   },
   projects: [{
