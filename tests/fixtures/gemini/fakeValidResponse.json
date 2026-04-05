@@ -1,0 +1,19 @@
+{
+  "items": ["rice", "chicken breast", "egg"],
+  "calories": 630,
+  "confidence": 0.92,
+  "breakdown": [
+    {
+      "item": "rice",
+      "calories": 300
+    },
+    {
+      "item": "chicken breast",
+      "calories": 250
+    },
+    {
+      "item": "egg",
+      "calories": 80
+    }
+  ]
+}
