@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <title>Calorie Tracker</title>
+    <link rel="stylesheet" href="styles.css">
     <script src="app.js" defer></script>
   </head>
   <body>
@@ -10,8 +11,11 @@
 
     <input type="file" id="image" accept="image/*"/>
 
-    <button id="uploadBtn">Upload Image (fake)</button>
-    <p id="uploadStatus"></p>
+    <button id="uploadBtn">Upload Image</button>
+    <div id="status">
+      <div id="statusSpinner" class="spinner hidden"></div>
+      <span id="statusText"></span>
+    </div>
 
     <img id="preview" style="display: none"/>
     <p id="results"></p>

@@ -1,6 +1,9 @@
 const image = document.getElementById("image")
+
 const uploadBtn = document.getElementById("uploadBtn")
-const uploadStatus = document.getElementById("uploadStatus")
+const statusSpinner = document.getElementById("statusSpinner")
+const statusText = document.getElementById("statusText")
+
 const results = document.getElementById("results")
 const preview = document.getElementById("preview")
 
@@ -25,7 +28,8 @@ image.addEventListener("change", (event) => {
 
 uploadBtn.addEventListener("click", async () => {
   uploadBtn.disabled = true
-  uploadStatus.textContent = "Uploading..."
+  statusSpinner.classList.remove("hidden")
+  statusText.textContent = "Uploading..."
 
   preview.style.display = "none"
   preview.src = ""
@@ -60,6 +64,7 @@ uploadBtn.addEventListener("click", async () => {
     results.textContent = `Error uploading file: ${error.message}`
   } finally {
     uploadBtn.disabled = false
-    uploadStatus.textContent = ""
+    statusSpinner.classList.add("hidden")
+    statusText.textContent = ""
   }
 })
