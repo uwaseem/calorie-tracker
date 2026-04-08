@@ -2,6 +2,7 @@ export default {
     test: {
         globals: true,
         environment: 'node',
+        exclude: ['tests/ui'],
         coverage: {
             provider: 'v8',
             all: true,

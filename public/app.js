@@ -1,6 +1,11 @@
 const image = document.getElementById("image")
+
 const uploadBtn = document.getElementById("uploadBtn")
+const statusSpinner = document.getElementById("statusSpinner")
+const statusText = document.getElementById("statusText")
+
 const results = document.getElementById("results")
+const preview = document.getElementById("preview")
 
 let selectedFile = null
 let tempImageURL = null
@@ -22,8 +27,12 @@ image.addEventListener("change", (event) => {
 })
 
 uploadBtn.addEventListener("click", async () => {
-  document.getElementById("preview").style.display = "none"
-  document.getElementById("preview").src = ""
+  uploadBtn.disabled = true
+  statusSpinner.classList.remove("hidden")
+  statusText.textContent = "Uploading..."
+
+  preview.style.display = "none"
+  preview.src = ""
   results.textContent = ""
 
   if (!selectedFile) {
@@ -47,12 +56,15 @@ uploadBtn.addEventListener("click", async () => {
     const { data } = await response.json()
     results.textContent = `Upload successful! Server response: ${JSON.stringify(data, null, 2)}`
 
-    const img = document.getElementById("preview")
-    img.src = tempImageURL
-    img.style.display = "block"
+    preview.src = tempImageURL
+    preview.style.display = "block"
 
   } catch (error) {
     console.error("Error uploading file:", error)
     results.textContent = `Error uploading file: ${error.message}`
+  } finally {
+    uploadBtn.disabled = false
+    statusSpinner.classList.add("hidden")
+    statusText.textContent = ""
   }
 })

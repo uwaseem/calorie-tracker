@@ -7,7 +7,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
+      - name: Checkout Repo
         uses: actions/checkout@v4
 
       - name: Setup Node.js
@@ -16,8 +16,20 @@ jobs:
           node-version: 20
           cache: npm
 
-      - name: Install dependencies
+      - name: Install NPM Dependencies
         run: npm ci
 
-      - name: Run tests
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Start Server
+        run: npm start &
+
+      - name: Wait for Server
+        run: npx wait-on http://localhost:3000
+
+      - name: Run UI Tests
+        run: npm run test-ui
+
+      - name: Run Server Tests
         run: npm test
